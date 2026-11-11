@@ -37,3 +37,5 @@ export const getAllBikes = async (req, res)=>{
 export const homePage = (req, res) => {
     res.render('home')
 }
+
+
