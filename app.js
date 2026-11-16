@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { addNewBike, deleteBike, getAllBikes, getBikes, homePage, updateBike } from './Controllers/bike.controller.js';
 import { register, login } from './Controllers/auth.controller.js';
+import authRoutes from './Routes/auth_routes.js'
 
 // import router from './Routes/routes.js';
 
@@ -11,11 +12,12 @@ const app = express()
 
 app.use(express.json())  // req body == json()
 
-app.use(express.urlencoded()) // req.body == form
+app.use(express.urlencoded({extended: true})) // req.body == form
 app.set('view engine', 'ejs') // view 
 app.use(express.static('public')) // static
 
-app.get('/', homePage)
+app.use('/', authRoutes())
+/*app.get('/', homePage)
 
 app.post('/', addNewBike)
 app.get('/bikes', getAllBikes)
@@ -24,6 +26,7 @@ app.delete('/bikes/:id', deleteBike)
 
 app.post('/register', register)
 app.post('/login', login)
+*/
 
 app.listen(process.env.PORT,()=>{
         console.log('server is runing on port: http://localhost:3000')
